@@ -1,0 +1,42 @@
+form {
+  > button {
+    display: block;
+    margin-top: 20px;
+  }
+  mat-radio-group {
+    display: flex;
+
+    mat-radio-button {
+      margin-right: 35px;
+    }
+  }
+}
+mat-form-field {
+  display: block;
+}
+
+mat-radio-group {
+  margin-bottom: 15px;
+}
+
+
+.all_checked {
+  display: flex;
+  padding: 10px 0;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+mat-card-title {
+  justify-content: space-between;
+}
+.error {
+  display: flex;
+  align-items: center;
+  color: #f44336;
+  font-size: 14px;
+  margin-left: 15px;
+  mat-icon {
+    margin-right: 7px;
+  }
+}

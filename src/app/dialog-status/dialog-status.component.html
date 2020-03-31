@@ -1,0 +1,29 @@
+<!--<h2 mat-dialog-title>3333</h2>-->
+
+<mat-dialog-content>
+  <div class="success" *ngIf="data.ev === 'update'">
+    <mat-icon>update</mat-icon>
+    {{data.txt}}
+  </div>
+  <div class="success" *ngIf="data.ev === 'create'">
+    <mat-icon>create</mat-icon>
+    {{data.txt}}
+  </div>
+  <div class="success" *ngIf="data.ev === 'email' && data.stat === 'success'">
+    <mat-icon>email</mat-icon>
+    {{data.txt}}
+  </div>
+  <div class="error" *ngIf="data.ev === 'email' && data.stat === 'error'">
+    <mat-icon>email</mat-icon>
+    {{data.txt}}
+  </div>
+  <div class="success" *ngIf="data.ev === 'push' && data.stat === 'success'">
+    <mat-icon>message</mat-icon>
+    {{data.txt}}
+  </div>
+</mat-dialog-content>
+
+
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Cancel</button>
+</div>

@@ -1,0 +1,168 @@
+<div class="wrap_box" *ngIf="blockAddMeeting === true">
+  <div class="heading" *ngIf="upadateMeeting === false">Create meeting</div>
+  <div class="heading" *ngIf="upadateMeeting === true">Update meeting</div>
+  <div class="content flex">
+    <form [formGroup]="meetingForm" (ngSubmit)="onSubmit()" novalidate>
+
+      <!-- name -->
+      <mat-form-field>
+        <input type="text" matInput formControlName="name" placeholder="Meeting name" [(ngModel)]="meetup.name"
+               name="name" required>
+        <mat-error *ngIf="meetingForm.controls['name'].invalid && meetingForm.controls['name'].touched">Name is
+          required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- description -->
+      <mat-form-field>
+        <textarea matInput formControlName="description" placeholder="Description of the meeting"
+                  [(ngModel)]="meetup.description" required
+                  name="description"></textarea>
+        <mat-error *ngIf="meetingForm.controls['description'].invalid && meetingForm.controls['description'].touched">
+          Description is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- address -->
+      <mat-form-field>
+        <input type="text" matInput formControlName="address" placeholder="Meeting Address" [(ngModel)]="meetup.address"
+               name="address" required>
+        <mat-error *ngIf="meetingForm.controls['address'].invalid && meetingForm.controls['address'].touched">Address is
+          required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- coordinates -->
+      <mat-form-field>
+        <input type="text" matInput formControlName="addressUrl" placeholder="Meeting address url"
+               [(ngModel)]="meetup.addressUrl" name="addressUrl" required>
+        <!--        <mat-error *ngIf="errorHandling('addressUrl', 'required')">Address url is required</mat-error>-->
+        <mat-error *ngIf="meetingForm.controls['addressUrl'].invalid && meetingForm.controls['addressUrl'].touched">
+          Address url is required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- coordinates -->
+      <!--      <div class="row_inputs">-->
+      <!--        <mat-form-field appearance="outline">-->
+      <!--          <mat-label>Meeting Coordinates</mat-label>-->
+      <!--          <input matInput formControlName="lat" placeholder="Latitude" name="lat" [(ngModel)]="coordinates.lat" required>-->
+      <!--          <mat-error *ngIf="errorHandling('lat', 'required')">Latitude is required</mat-error>-->
+      <!--          <mat-icon matSuffix>gps_fixed</mat-icon>-->
+      <!--          <mat-hint>Latitude must be a number between -90 and 90</mat-hint>-->
+      <!--        </mat-form-field>-->
+      <!--        <mat-form-field appearance="outline">-->
+      <!--          <mat-label>Meeting Coordinates</mat-label>-->
+      <!--          <input matInput formControlName="lng" placeholder="Longitude" name="lng" [(ngModel)]="coordinates.lng" required>-->
+      <!--          <mat-error *ngIf="errorHandling('lng', 'required')">Longitude is required</mat-error>-->
+      <!--          <mat-icon matSuffix>gps_fixed</mat-icon>-->
+      <!--          <mat-hint>Longitude must be a number between -180 and 180</mat-hint>-->
+      <!--        </mat-form-field>-->
+      <!--      </div>-->
+
+      <!-- start date -->
+      <div class="row_inputs" style="margin-top:20px">
+        <mat-form-field>
+          <input matInput [matDatepicker]="startDatePicker" placeholder="Start date meetup"
+                 [(ngModel)]="meetup.startDate" formControlName="startDate"
+                 name="startDate" (dateChange)="setStartDate($event)" required [attr.disabled]="true">
+          <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker [attr.disabled]="false"></mat-datepicker>
+          <mat-error *ngIf="meetingForm.controls['startDate'].invalid && meetingForm.controls['startDate'].touched">
+            Start date is required
+          </mat-error>
+        </mat-form-field>
+
+        <!--time-->
+        <mat-form-field *ngIf="meetup.startDate">
+          <input mask="99" [dropSpecialCharacters]="false" type="text" matInput placeholder="Hour" name="startTime"
+                 [(ngModel)]="meetupStartTime" formControlName="startTime"
+                 (change)="setStartTime()" required>
+          <mat-error *ngIf="meetingForm.controls['startTime'].invalid && meetingForm.controls['startDate'].touched">
+            Start time is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- end date -->
+      <div class="row_inputs">
+        <mat-form-field>
+          <input matInput [matDatepicker]="endDatePicker" placeholder="End date meetup" [(ngModel)]="meetup.endDate"
+                 formControlName="endDate" name="endDate" (dateChange)="setEndDate($event)" [attr.disabled]="true"
+                 required>
+          <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker [attr.disabled]="false"></mat-datepicker>
+          <mat-error *ngIf="meetingForm.controls['endDate'].invalid && meetingForm.controls['endDate'].touched">
+            End date is required
+          </mat-error>
+        </mat-form-field>
+
+        <!--time-->
+        <mat-form-field *ngIf="meetup.endDate">
+          <input mask="99" [dropSpecialCharacters]="false" type="text" matInput placeholder="Hour" name="endTime"
+                 [(ngModel)]="meetupEndTime" formControlName="endTime" (change)="setEndTime()" required>
+          <mat-error *ngIf="meetingForm.controls['endTime'].invalid && meetingForm.controls['endTime'].touched">
+            End time is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field>
+        <mat-select placeholder="Regions" (selectionChange)="regionChange($event)" formControlName="region">
+          <mat-option *ngFor="let item of regions" value="{{item.id}}">{{item.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="meetingForm.controls['region'].invalid && meetingForm.controls['region'].touched">Region is
+          required
+        </mat-error>
+        <!--        <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>-->
+      </mat-form-field>
+
+<!--      <button (click)="openStatusDialog()">1111</button>-->
+      <div class="wrap_btn">
+        <button type="button" mat-raised-button color="basic" (click)="cancelForm()">Cancel</button>
+        <button type="submit" *ngIf="upadateMeeting === false" mat-raised-button color="primary" [disabled]="!meetingForm.valid">Create meeting</button>
+        <button type="submit" *ngIf="upadateMeeting === true" mat-raised-button color="primary" [disabled]="!meetingForm.valid">Update meeting</button>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+
+
+<div class="wrap_table">
+  <div class="heading_table">
+    Meetings
+    <button class="add" mat-raised-button (click)="addMeeting()">
+      <mat-icon>library_add</mat-icon>
+      Add meeting
+    </button>
+  </div>
+  <table class="style" *ngIf="meetups?.length > 0;else noItems">
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Action</th>
+    </tr>
+    <ng-container *ngFor="let item of meetups">
+      <tr class="body_table" [ngClass]="{'editMeetup':upadateMeeting === true && (item.id === meetup.id)}">
+        <td class="name">{{item.name}}</td>
+        <td class="id">{{item.id}}</td>
+        <td class="action">
+          <button (click)="updateMeetup($event, item)" mat-raised-button color="primary">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </button>
+          <button (click)="openDialog(item)" mat-raised-button color="warn">
+            <mat-icon>delete</mat-icon>
+            Delete
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+
+  <ng-template #noItems>
+    <div class="no_item">There are no regions to list</div>
+  </ng-template>
+</div>

@@ -1,0 +1,93 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.links {
+  display: flex;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  > a, span, button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-image: url(../../assets/img/market_app.jpg);
+    font-size: 0;
+    border: none;
+    cursor: pointer;
+
+    &.play_market {
+      width: 487px;
+      height: 160px;
+      background-position: -12px -12px;
+      margin-right: 10px;
+      position: relative;
+      cursor: not-allowed;
+      opacity: .4;
+      text-decoration: none;
+
+      @media screen and (max-width: 768px) {
+        width: 285px;
+        height: 100px;
+        background-size: 300px;
+        background-position: -7px -7px;
+        margin-right: 0;
+      }
+    }
+
+    &.app_store {
+      width: 493px;
+      height: 155px;
+      background-position: -11px -206px;
+      margin-left: 10px;
+      @media screen and (max-width: 768px) {
+        width: 285px;
+        height: 100px;
+        background-size: 294px;
+        background-position: -7px -334px;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.error {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 21px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.regist_box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  @media screen and (max-width: 768px) {
+    height: 100px;
+  }
+}
+
+.download_box {
+  @media screen and (max-width: 768px) {
+    text-align: center;
+  }
+}

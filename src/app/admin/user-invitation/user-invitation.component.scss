@@ -1,0 +1,16 @@
+.form_deeplink {
+  margin-top: 20px;
+}
+.error {
+  display: flex;
+  align-items: center;
+  color: #f44336;
+  font-size: 14px;
+  margin-left: 15px;
+  mat-icon {
+    margin-right: 7px;
+  }
+}
+mat-card-title {
+  justify-content: space-between;
+}

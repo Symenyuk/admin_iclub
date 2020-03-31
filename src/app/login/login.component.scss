@@ -1,0 +1,71 @@
+app-login {
+  display: flex;
+  margin: auto;
+}
+
+.wrap_box {
+  margin: 100px auto;
+  width: 40%;
+}
+
+.header {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+
+
+form {
+  display: flex;
+
+  mat-form-field {
+    flex-basis: 50%;
+
+    &:first-child {
+      margin-right: 10px;
+    }
+
+    &:last-child {
+      margin-left: 10px;
+    }
+  }
+}
+.row {
+  .login {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 50%;
+  }
+  .error {
+    color: red;
+    text-align: center;
+  }
+  &.social {
+    margin-top: 23px;
+    button {
+      width: 100%;
+    }
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  .form-group {
+    display: flex;
+    button {
+      margin: auto;
+    }
+  }
+  .invalid-feedback {
+    color: red;
+    font-size: 12px;
+  }
+  .alert {
+    color: red;
+    font-size: 16px;
+    text-align: center;
+    margin: 15px 0;
+  }
+}

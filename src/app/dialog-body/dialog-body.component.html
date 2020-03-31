@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Are you sure?</h2>
+
+<mat-dialog-content>
+  Do you really want to delete these records? This process cannot be undone.
+</mat-dialog-content>
+
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onDismiss()">Cancel</button>
+  <button mat-raised-button color="warn" (click)="onConfirm()">Delete</button>
+</div>
+
+
+
+

@@ -1,0 +1,38 @@
+<div class="wrapper">
+    <mat-spinner *ngIf="exist === 'load'"></mat-spinner>
+
+    <div class="info">
+        <!-- <div>os: = {{deviceInfo.os}}</div> -->
+        <!-- <div>device = {{deviceInfo.device}}</div> -->
+        <!-- <div>isMobile = {{isMobile}}</div>
+        <div>isTablet = {{isTablet}}</div>
+        <div>isDesktopDevice = {{isDesktopDevice}}</div> -->
+    </div>
+
+    <div *ngIf="exist === 'success'">
+        <div class="download_box">
+            <h2 class="download">Download Mobile App</h2>
+            <!-- <div class="links" *ngIf="isDesktopDevice === true || deviceInfo.os === 'Android' || deviceInfo.os === 'iOS'"> -->
+            <div class="links">
+                <span class="play_market">Play Market</span>
+                <button type="button" class="app_store" (click)="goToAppStore()"></button>
+<!--                <a class="app_store" href="{{appStore}}" target="_blank">App Store</a>-->
+            </div>
+
+<!--          <a style="display: block; text-align: center; line-height: 50px;" class="app_store" href="{{appStore}}" target="_blank">Download iclub-app from App Store </a>-->
+        </div>
+        <div class="regist_box">
+            <a class="regist_list" mat-raised-button color="primary" [href]="getRegistLink()" target="_blank">Registration in the app</a>
+        </div>
+    </div>
+
+    <div class="error" *ngIf="noExist === true && exist === 'load'">Error. There is no such user.</div>
+
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+table {
+  td, th {
+    &.name {
+      width: 35%;
+    }
+    &.type {
+      width: 45%;
+    }
+    &.action {
+      width: 20%;
+    }
+  }
+}

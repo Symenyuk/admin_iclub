@@ -1,0 +1,62 @@
+<div class="wrap_box">
+  <div class="heading">Send push notification</div>
+  <div class="content">
+    <form [formGroup]="pushForm" (ngSubmit)="onSubmit()" novalidate>
+
+      <div class="wrap_form_content">
+        <div class="left_box">
+          <!-- name -->
+          <mat-form-field>
+            <input type="text" matInput formControlName="name" placeholder="Name" [(ngModel)]="push.name" name="name"
+                   required>
+            <mat-error *ngIf="pushForm.controls['name'].invalid && pushForm.controls['name'].touched">
+              Name is required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- description -->
+          <mat-form-field>
+            <textarea matInput formControlName="description" placeholder="Description" [(ngModel)]="push.description"
+                      name="description"></textarea>
+            <mat-error *ngIf="pushForm.controls['description'].invalid && pushForm.controls['description'].touched">
+              Description is required
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+        <div class="right_box">
+          <mat-card class="add_user">
+            <mat-card-title>
+              Select users
+              <span class="error" *ngIf="tempUsers.length === 0 && allSelected === false">
+                <mat-icon>error</mat-icon>
+                you must select at least one user
+              </span>
+            </mat-card-title>
+            <mat-card-content>
+              <ul *ngIf="users?.length > 0;else noUsers">
+                <mat-checkbox class="all_checked" (change)="toggleSelectAll($event)">Select all users</mat-checkbox>
+                <li *ngFor="let item of users">
+                  <mat-checkbox *ngIf="allSelected === false"
+                                (change)="pushUserList($event, item)">{{item.name}}</mat-checkbox>
+                </li>
+              </ul>
+              <ng-template #noUsers>
+                <div class="no_item">The user list is empty.</div>
+              </ng-template>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+      <div class="wrap_btn">
+        <button mat-raised-button [disabled]="tempUsers.length === 0 && allSelected === false || ! pushForm.valid" color="primary" type="submit" class="login">Send</button>
+      </div>
+
+    </form>
+
+
+  </div>
+</div>
+
+

@@ -1,0 +1,107 @@
+<div class="wrap_box" *ngIf="blockAddChat === true">
+  <div class="heading" *ngIf="updatedChat === false">Create group chat</div>
+  <div class="heading" *ngIf="updatedChat === true">Update group chat</div>
+  <div class="content">
+    <form [formGroup]="groupChatForm" (ngSubmit)="onSubmit()" novalidate>
+
+      <div class="wrap_form_content">
+
+        <div class="left_box">
+          <mat-form-field>
+            <input type="text" matInput formControlName="name" placeholder="Name chat" [(ngModel)]="chat.name" name="name" required>
+            <mat-error *ngIf="groupChatForm.controls['name'].invalid && groupChatForm.controls['name'].touched">Name is
+              required
+            </mat-error>
+          </mat-form-field>
+
+          <div class="wrap_add_img_region">
+            <div>
+              <img *ngIf="chat.image" class="picture_place" src="{{chat.image}}" alt="" width="50" height="50">
+              <div *ngIf="!chat.image" class="picture_place no_image">no image</div>
+            </div>
+            <button *ngIf="updatedChat === false" type="button" mat-stroked-button color="primary" (click)="imgFileInput.click()">Add chat image</button>
+            <button *ngIf="updatedChat === true && chat.image" type="button" mat-stroked-button color="primary" (click)="imgFileInput.click()">Update chat image</button>
+            <button *ngIf="updatedChat === true && !chat.image" type="button" mat-stroked-button color="primary" (click)="imgFileInput.click()">Add chat image</button>
+            <input hidden type="file" #imgFileInput (change)="uploadFile($event)">
+
+            <span class="file_name" *ngIf="file">{{file.name}}</span>
+            <mat-progress-bar *ngIf="file" mode="determinate" value="{{ uploadPercent | async }}"></mat-progress-bar>
+          </div>
+        </div>
+
+
+        <div class="right_box">
+          <mat-card class="add_user_to_chat">
+            <mat-card-title>Users</mat-card-title>
+            <mat-card-content>
+              <ul *ngIf="user?.length > 0;else noUsers">
+                <li *ngFor="let item of user;">
+<!--                  <ng-template *ngFor="let checkedId of tempUserId;">{{checkedId}}</ng-template>-->
+                  <mat-checkbox (change)="addUsers($event, item)" [checked]="isChecked(item.id)">{{item.name}}</mat-checkbox>
+<!--                  {{checkedId}}-->
+                </li>
+              </ul>
+
+              <ng-template #noUsers>
+                <div class="no_item">The user list is empty.</div>
+              </ng-template>
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+
+
+      </div>
+
+      <div class="wrap_btn">
+        <button type="button" mat-raised-button color="basic" (click)="cancelForm()">Cancel</button>
+        <button *ngIf="updatedChat === false" [disabled]="!groupChatForm.valid" type="submit" mat-raised-button color="primary">Create group chat</button>
+        <button *ngIf="updatedChat === true" [disabled]="!groupChatForm.valid" type="submit" mat-raised-button color="primary">Update group chat</button>
+      </div>
+    </form>
+
+
+  </div>
+</div>
+
+
+
+<div class="wrap_table">
+  <div class="heading_table">
+    Group chats
+    <button class="add" mat-raised-button (click)="addChat()">
+      <mat-icon>library_add</mat-icon>
+      Add chat
+    </button>
+  </div>
+  <table class="style" *ngIf="chats?.length > 0;else noItems">
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Action</th>
+    </tr>
+    <ng-container *ngFor="let item of chats">
+      <tr class="body_table">
+        <td >{{item.name}}</td>
+        <td>{{item.type}}</td>
+        <td class="action">
+          <button (click)="updateChat(item)" mat-raised-button color="primary">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </button>
+          <button (click)="openDialog(item)" mat-raised-button color="warn">
+            <mat-icon>delete</mat-icon>
+            Delete
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+
+  <ng-template #noItems>
+    <div class="no_item">There are no chat to list</div>
+  </ng-template>
+</div>
+
+
+

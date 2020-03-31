@@ -1,0 +1,107 @@
+<div class="wrap_box" *ngIf="blockAddRegion === true">
+  <div class="heading" *ngIf="updatedRegion === false">Create region</div>
+  <div class="heading" *ngIf="updatedRegion === true">Update region</div>
+  <div class="content">
+    <form [formGroup]="regionForm" (ngSubmit)="onSubmit()" novalidate>
+
+      <div class="wrap_form_content">
+        <div class="left_box">
+
+          <mat-form-field>
+            <input type="text" matInput formControlName="name" placeholder="Name region" [(ngModel)]="region.name" name="name" (change)="validNameRegion($event)">
+            <mat-hint style="color: #f44336;" *ngIf="nameRegionValid === false">region "{{region.name}}" already exists</mat-hint>
+            <mat-error *ngIf="regionForm.controls['name'].invalid && regionForm.controls['name'].touched">Name is
+              required
+            </mat-error>
+          </mat-form-field>
+
+          <div class="wrap_add_img_region">
+            <div>
+              <img *ngIf="region.image" class="picture_place" src="{{region.image}}" alt="" width="200" height="200">
+              <div *ngIf="!region.image" class="picture_place no_image">no image</div>
+
+            </div>
+
+            <button *ngIf="updatedRegion === false" type="button" mat-stroked-button color="primary" (click)="imgFileInput.click()">Add region image</button>
+            <button *ngIf="updatedRegion === true && region.image" type="button" mat-stroked-button color="primary" (click)="imgFileInput.click()">Update region image</button>
+            <button *ngIf="updatedRegion === true && !region.image" type="button" mat-stroked-button color="primary" (click)="imgFileInput.click()">Add region image</button>
+            <input hidden type="file" #imgFileInput (change)="uploadFile($event)">
+
+<!--            <button type="button" (click)="deleteImg(region.image)">Delete img</button>-->
+
+            <span class="file_name" *ngIf="file">{{file.name}}</span>
+            <mat-progress-bar *ngIf="file" mode="determinate" value="{{ uploadPercent | async }}"></mat-progress-bar>
+            <!--    <a class="download_url" [href]="UploadedFileURL | async">{{ UploadedFileURL | async }}</a>-->
+          </div>
+
+        </div>
+
+        <div class="right_box">
+
+          <mat-card class="add_user_to_chat">
+            <mat-card-title>User</mat-card-title>
+            <mat-card-content>
+              <ul *ngIf="users?.length > 0;else noUsers">
+                <li *ngFor="let item of users">
+                  <mat-checkbox (change)="addUsers($event, item)" [checked]="isChecked(item)">{{item.name}}</mat-checkbox>
+                </li>
+              </ul>
+              <ng-template #noUsers>
+                <div class="no_item">The user list is empty.</div>
+              </ng-template>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+      </div>
+
+
+      <div class="wrap_btn">
+        <button type="button" mat-raised-button color="basic" (click)="cancelForm()">Cancel</button>
+        <button *ngIf="updatedRegion === false" [disabled]="!regionForm.valid" type="submit" mat-raised-button color="primary">Create region</button>
+        <button *ngIf="updatedRegion === true" [disabled]="!regionForm.valid" type="submit" mat-raised-button color="primary">Update region</button>
+      </div>
+    </form>
+
+
+  </div>
+</div>
+
+<div class="wrap_table">
+  <div class="heading_table">Regions
+    <button class="add" mat-raised-button (click)="addRegion()">
+      <mat-icon>library_add</mat-icon>
+      Add region
+    </button>
+  </div>
+  <table class="style" *ngIf="regions?.length > 0;else noItems">
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Action</th>
+    </tr>
+    <ng-container *ngFor="let item of regions">
+      <tr class="body_table">
+        <td class="name">{{item.name}}</td>
+        <td class="id">{{item.id}}</td>
+        <td class="action">
+          <button (click)="updateRegion(item)" mat-raised-button color="primary">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </button>
+          <button (click)="openDialog(item)" mat-raised-button color="warn">
+            <mat-icon>delete</mat-icon>
+            Delete
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+
+  <ng-template #noItems>
+    <div class="no_item">There are no regions to list</div>
+  </ng-template>
+</div>
+
+
+

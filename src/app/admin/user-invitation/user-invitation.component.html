@@ -1,0 +1,81 @@
+<div class="wrap_box">
+  <div class="heading">User Invitation</div>
+  <div class="content">
+    <form [formGroup]="emailForm" (ngSubmit)="onSubmit()" novalidate>
+
+      <div class="wrap_form_content">
+        <div class="left_box">
+          <!-- to (email) -->
+          <mat-form-field>
+            <input type="text" matInput formControlName="to" placeholder="To (email)" [(ngModel)]="email.to" name="to"
+                   required>
+            <mat-error
+              *ngIf="emailForm.controls['to'].invalid && emailForm.controls['to'].touched || emailForm.controls['to'].errors">
+              Email is required and must be valid
+            </mat-error>
+          </mat-form-field>
+          <!-- subject -->
+          <mat-form-field>
+            <input type="text" matInput formControlName="subject" placeholder="Subject" [(ngModel)]="email.subject"
+                   name="subject" required>
+            <mat-error *ngIf="emailForm.controls['subject'].invalid && emailForm.controls['subject'].touched">
+              Subject is required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- body -->
+          <mat-form-field>
+            <textarea matInput formControlName="body" placeholder="Body" [(ngModel)]="email.body"
+                      matTextareaAutosize matAutosizeMinRows=2 matAutosizeMaxRows=30 name="body" required>
+            </textarea>
+            <mat-error *ngIf="emailForm.controls['body'].invalid && emailForm.controls['body'].touched">
+              Text is required
+            </mat-error>
+          </mat-form-field>
+
+
+        </div>
+
+        <div class="right_box">
+          <mat-card class="add_user">
+            <mat-card-title>Select regions
+              <span class="error" *ngIf="tempRegion.length === 0">
+                <mat-icon>error</mat-icon>
+                you must select at least one region
+              </span>
+
+            </mat-card-title>
+            <mat-card-content>
+              <ul *ngIf="regions?.length > 0;else noRegions">
+                <li *ngFor="let item of regions">
+                  <mat-checkbox (change)="pushRegionList($event, item)">{{item.name}}</mat-checkbox>
+                </li>
+              </ul>
+              <ng-template #noRegions>
+                <div class="no_item">The user list is empty.</div>
+              </ng-template>
+            </mat-card-content>
+          </mat-card>
+
+          <button type="button" [disabled]="tempRegion.length === 0" class="form_deeplink" color="primary" mat-stroked-button (click)="formDeeplink()">
+            <mat-icon>link</mat-icon>
+            Create deeplink
+          </button>
+<!--          <div *ngIf="regionId">appiclub://invite?ref={{regionId}}</div>-->
+        </div>
+
+      </div>
+
+      <button type="submit" [disabled]="!emailForm.valid || refId === ''" mat-raised-button color="primary">Send email</button>
+    </form>
+
+    <!--    <div *ngIf="mailStatus === 'done'" class="alert_status success">Email successfully sent</div>-->
+    <!--    <div *ngIf="mailStatus === 'error'" class="alert_status error">Email not sent</div>-->
+
+  </div>
+</div>
+
+
+
+
+

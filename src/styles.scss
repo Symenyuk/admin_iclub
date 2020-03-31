@@ -1,0 +1,257 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  //padding-top: 60px;
+}
+
+mat-sidenav-container {
+  background-color: #fff !important;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  > li {
+    list-style-type: none;
+    margin: 2px 0;
+  }
+}
+
+
+.mat-toolbar.mat-primary {
+  box-shadow: 0 3px 5px -1px
+  rgba(0,0,0,.2),0 6px 10px 0 rgba(0,0,0,.14),0 1px 18px 0 rgba(0,0,0,.12);
+  z-index: 2;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.wrap_box {
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  margin-bottom: 45px;
+  //padding: 20px;
+  .heading {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 500;
+    background-color: #3f51b5;
+    color: #fff;
+  }
+  .content {
+    padding: 20px;
+    &.flex {
+      display: flex;
+      > form {
+        flex-basis: 50%;
+        margin-right: 20px;
+      }
+      > mat-card {
+        flex-basis: 50%;
+        padding-left: 20px;
+        margin-left: 20px;
+
+      }
+    }
+  }
+}
+
+
+table.style {
+  width: 100%;
+  border-spacing: 0;
+  tr {
+    border-top: 1px solid rgba(0, 0, 0, .12);
+    height: 48px;
+    &.body_table {
+      &:hover, &:focus {
+        background-color: #eee;
+      }
+    }
+    th {
+      font-weight: 500;
+      font-size: 12px;
+      color: rgba(0,0,0,.54);
+      &:first-child {
+        padding-left: 28px;
+      }
+      &:last-child {
+        padding-right: 28px;
+      }
+    }
+  }
+
+  td, th {
+    border-top: 1px solid rgba(0, 0, 0, .12);
+    text-align: left;
+
+    &.action {
+      button {
+        margin: 0 2px;
+        cursor: pointer;
+      }
+    }
+  }
+  td {
+    color: rgba(0,0,0,.87);
+    font-size: 14px;
+    &:first-child {
+      padding-left: 28px;
+    }
+    &:last-child {
+      padding-right: 28px;
+    }
+  }
+}
+
+
+.wrap_add_img_region {
+  margin-top: 15px;
+  margin-bottom: 20px;
+  //border: 1px dashed #ccc;
+  //padding: 30px;
+  > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+
+  .picture_place {
+    display: flex;
+    width: 200px;
+    height: 200px;
+    //margin-right: 30px;
+    //margin: 0 auto;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    &.no_image {
+      color: rgba(0, 0, 0, 0.54);
+      border: 1px dashed #ccc;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+    }
+  }
+  button {
+
+  }
+
+  .mat-progress-bar {
+    margin: 10px 0;
+  }
+  .file_name {
+    margin-left: 15px;
+    font-size: 14px;
+  }
+
+}
+
+
+.alert_status {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 15px;
+  &.success {
+    color: #155724;
+  }
+  &.error {
+    color: #f44336;
+  }
+}
+
+.row_inputs {
+  display: flex;
+}
+
+
+.wrap_table {
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+
+  .heading_table {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 500;
+    background-color: #3f51b5;
+    color: #fff;
+    position: relative;
+    .add {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      right: 30px;
+      cursor: pointer;
+      mat-icon {
+        margin-right: 10px;
+      }
+    }
+  }
+  .no_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 100%;
+  }
+}
+
+form {
+  .wrap_form_content {
+    display: flex;
+    justify-content: space-between;
+    > div {
+      flex-basis: 50%;
+      &.left_box {
+        margin-right: 25px;
+        mat-form-field {
+          width: 100%;
+        }
+      }
+      &.right_box {
+        margin-left: 25px;
+        mat-card {
+          padding: 0;
+          mat-card-title {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            color: rgba(0,0,0,.54);
+            background: rgba(0,0,0,.03);
+            font-size: 18px;
+          }
+          .mat-card-content {
+            padding: 10px 20px;
+          }
+        }
+      }
+    }
+  }
+}
+.wrap_btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+  width: 100%;
+  button {
+    &:first-child {
+      margin-right: 5px;
+    }
+    &:last-child {
+      margin-left: 5px;
+    }
+  }
+}

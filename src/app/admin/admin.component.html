@@ -1,0 +1,105 @@
+<mat-toolbar color="primary">
+
+  <div class="logo">
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+<!--    <a mat-list-item [routerLink]="['/admin']" (click)="setSection('admin')" routerLinkActive="active">Admin-iclub</a>-->
+    <div>iClub Admin panel</div>
+
+  </div>
+
+
+  <div class="user_info">
+    <button type="button" (click)="logout()" mat-raised-button color="warn" class="logout"><mat-icon>exit_to_app</mat-icon> Logout</button>
+    <span class="user_name">{{user.name}}</span>
+    <img class="avatar" width="50" height="50" [src]="user.image" *ngIf="user.image" alt="User image">
+  </div>
+
+
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #drawer mode="side" opened role="navigation">
+    <mat-nav-list>
+      <a [ngClass]="{'active':section === 'user-invitation'}" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}" (click)="setSection('user-invitation')" mat-list-item
+         [routerLink]="['/admin/user-invitation']">User invitations</a>
+      <a [ngClass]="{'active':section === 'send-push-notification'}" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}" (click)="setSection('send-push-notification')" mat-list-item
+         [routerLink]="['/admin/send-push-notification']">Sending push notifications</a>
+      <a [ngClass]="{'active':section === 'meetings'}" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}" (click)="setSection('meetings')" mat-list-item
+         [routerLink]="['/admin/meetings']">Meetings</a>
+      <a [ngClass]="{'active':section === 'group-chats'}" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}" (click)="setSection('group-chats')" mat-list-item
+         [routerLink]="['/admin/group-chats']">Group chats</a>
+      <a [ngClass]="{'active':section === 'regions'}" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}" (click)="setSection('regions')" mat-list-item
+         [routerLink]="['/admin/regions']">Regions</a>
+      <a [ngClass]="{'active':section === 'users'}" routerLinkActive="active"
+         [routerLinkActiveOptions]="{exact: true}" (click)="setSection('users')" mat-list-item
+         [routerLink]="['/admin/users']">Users</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content fxLayout="column">
+
+    <app-user-invitation *ngIf="section === 'user-invitation'"></app-user-invitation>
+    <app-send-push-notification *ngIf="section === 'send-push-notification'"></app-send-push-notification>
+    <app-meeting *ngIf="section === 'meetings'"></app-meeting>
+    <app-create-group-chat *ngIf="section === 'group-chats'"></app-create-group-chat>
+    <app-regions *ngIf="section === 'regions'"></app-regions>
+    <app-user-detele *ngIf="section === 'users'"></app-user-detele>
+
+    <!--    <div *ngIf="section === 'admin'" class="wrap_admin">-->
+    <!--      <div class="wrap_table">-->
+    <!--        <table class="style">-->
+    <!--          <tr>-->
+    <!--            <th>Total Users</th>-->
+    <!--            <th>Total Chat</th>-->
+    <!--            <th>Total Regions</th>-->
+    <!--            <th>Total Meeting</th>-->
+    <!--          </tr>-->
+    <!--          <ng-container>-->
+    <!--            <tr>-->
+    <!--              <td>{{userListAdmin?.length}}</td>-->
+    <!--              <td>{{chartListAdmin?.length}}</td>-->
+    <!--              <td>{{regionListAdmin?.length}}</td>-->
+    <!--              <td>{{meetingListAdmin?.length}}</td>-->
+    <!--            </tr>-->
+    <!--          </ng-container>-->
+    <!--        </table>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--        <div class="row">-->
+    <!--          <div class="col-md-4 col-md-offset-4">-->
+    <!--            <div class="card" style="width: 20rem;">-->
+    <!--              &lt;!&ndash;          <img class="card-img-top image" [src]="user.image" *ngIf="user.image" alt="User image">&ndash;&gt;-->
+    <!--              &lt;!&ndash;          <img class="card-img-top image" src="https://via.placeholder.com/400x300" *ngIf="!user.image" alt="User image">&ndash;&gt;-->
+    <!--              <div *ngIf='user.provider != "password"' class="card-body">-->
+    <!--                <h4 class="card-title">{{user.name}}</h4>-->
+    <!--                <p class="card-text">This is an example of Social Authentication using Firebase in an Angular 7 web-->
+    <!--                  app. </p>-->
+    <!--              </div>-->
+    <!--              <div *ngIf='user.provider == "password"' class="card-body">-->
+    <!--                <form [formGroup]="profileForm">-->
+    <!--                  <div class="form-group">-->
+    <!--                    <label>Your name</label>-->
+    <!--                    <input type="text" formControlName="name" class="form-control" required>-->
+    <!--                  </div>-->
+    <!--                </form>-->
+    <!--                <a (click)="save(profileForm.value)" class="btn btn-primary">Save</a>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+
+
+
+

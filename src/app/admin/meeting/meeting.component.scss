@@ -1,0 +1,62 @@
+mat-form-field {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+
+}
+
+.mat-form-field-wrapper {
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+mat-card {
+  width: 100%;
+}
+
+.row_inputs {
+  width: 70%;
+
+  mat-form-field {
+    &:first-child {
+      margin-right: 5px;
+    }
+
+    &:last-child {
+      margin-left: 5px;
+    }
+  }
+}
+
+.wrap_box .content.flex > form {
+  flex-basis: 80%;
+  margin: 0 auto;
+}
+
+
+table {
+  td, th {
+    &.name {
+      width: 35%;
+    }
+    &.id {
+      width: 45%;
+    }
+    &.action {
+      width: 20%;
+    }
+  }
+}
+
+.editMeetup {
+  background-color: #d4d4d4;
+  &:hover, &:focus {
+    background-color: #d4d4d4 !important;
+  }
+}

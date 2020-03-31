@@ -1,0 +1,11 @@
+{
+  "front_port": 8008,
+  "sendGridKey": "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",
+  "email": "invitation@iclub.vc",
+  "users" : [
+    {
+      "username": "user",
+      "password": "pass"
+    }
+  ]
+}
