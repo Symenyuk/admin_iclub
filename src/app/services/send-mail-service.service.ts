@@ -16,7 +16,7 @@ export class SendMailServiceService {
 
   public sendEmail(to: string, subject: string, body: string) {
     const URL = `${this.serverApi}/send_mail`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post(URL, JSON.stringify({to, subject, body}), {headers});
   }
 }

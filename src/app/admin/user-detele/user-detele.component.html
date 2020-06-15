@@ -1,49 +1,10 @@
-<!--<div class="wrap_table">-->
-<!--  <div class="heading_table">Users</div>-->
-<!--  <table class="style" *ngIf="users?.length > 0;else noItems">-->
-<!--    <tr>-->
-<!--      <th>Name</th>-->
-<!--      <th>Region</th>-->
-<!--      <th>Action</th>-->
-<!--    </tr>-->
-<!--    <ng-container *ngFor="let user of users">-->
-<!--      <tr class="body_table">-->
-<!--        <td class="name">{{user.name}}</td>-->
-<!--        <td class="regions">{{user.regions | join}}</td>-->
-<!--&lt;!&ndash;        <td class="status" *ngIf="item.deleted === true">Deactivated</td>&ndash;&gt;-->
-<!--&lt;!&ndash;        <td class="status" *ngIf="item.deleted === false">Active</td>&ndash;&gt;-->
-<!--        <td class="action">-->
-<!--          <button (click)="updateUser(user)" mat-raised-button color="primary" *ngIf="user.deleted === false" >-->
-<!--            <mat-icon>edit</mat-icon>-->
-<!--            Edit-->
-<!--          </button>-->
-<!--          <button type="button" *ngIf="user.deleted === false" (click)="openDialog(user)" mat-raised-button color="warn">-->
-<!--            <mat-icon>delete</mat-icon>-->
-<!--            Delete-->
-<!--          </button>-->
-<!--          <button type="button" *ngIf="user.deleted === true" (click)="activateUser($event, user)" mat-raised-button color="primary" class="user_activate">-->
-<!--            <mat-icon>person_add</mat-icon>-->
-<!--            Activate-->
-<!--          </button>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--    </ng-container>-->
-
-
-<!--  </table>-->
-
-<!--  <ng-template #noItems>-->
-<!--    <div class="no_item">There are no items to list</div>-->
-<!--  </ng-template>-->
-<!--</div>-->
-
-
 <div class="wrap_data">
   <div class="head">Users</div>
   <div class="row heading">
     <div class="left_">
       <div class="name">Name</div>
       <div class="regions">Regions</div>
+      <div class="desript">Description</div>
     </div>
     <div class="actions"></div>
   </div>
@@ -53,6 +14,7 @@
       <div class="left_">
         <div class="name">{{user.name}}</div>
         <div class="regions">{{user.regions | join}}</div>
+        <div class="descript">{{user.description}}</div>
       </div>
 
       <div class="actions">
@@ -74,7 +36,7 @@
 
     <div *ngIf="userEdit.name === user.name" class="about_me">
       <textarea rows="10" [(ngModel)]="user.description"></textarea>
-      <button type="button" mat-raised-button color="primary" (click)="updateDescriptUser(user)">Save</button>
+      <button type="button" mat-raised-button color="primary" (click)="updateDescriptUser(user); closeUpdate($event, user)">Save</button>
       <button type="button" mat-raised-button color="primary" (click)="closeUpdate($event, user)">Close</button>
     </div>
   </ng-container>

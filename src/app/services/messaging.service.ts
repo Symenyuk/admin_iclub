@@ -2,14 +2,12 @@ import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {AngularFireMessaging} from '@angular/fire/messaging';
-// import * as firebase from 'firebase';
 import * as firebase from 'firebase/app';
 import '@firebase/messaging';
 
 import {BehaviorSubject} from 'rxjs';
 import 'rxjs/add/operator/take';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} from '@angular/fire/firestore';
-import {Observable} from 'rxjs/Observable';
+import {AngularFirestore} from '@angular/fire/firestore';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 const httpOptions = {
@@ -40,17 +38,6 @@ export class MessagingService {
     );
   }
 
-  // requestPermission() {
-  //   this.angularFireMessaging.requestToken.subscribe(
-  //     (token) => {
-  //       console.log(token);
-  //     },
-  //     (err) => {
-  //       console.error('Unable to get permission to notify.', err);
-  //     }
-  //   );
-  // }
-
   sendPushMessage(to: string, title: string, text: string) {
     const url = 'https://fcm.googleapis.com/fcm/send';
     const body = {
@@ -68,38 +55,12 @@ export class MessagingService {
   }
 
 
-  // 1. UPDATE TOKEN
-  // private updateToken(token) {
-  //   this.afAuth.authState.take(1).subscribe(user => {
-  //     if (!user) {
-  //       return;
-  //     }
-  //
-  //     const data = {[user.uid]: token};
-  //     this.db.object('fcmTokens/').update(data); // TODO
-  //     // this.tokenDoc = this.afs.doc(`User/${token.id}`); // TODO
-  //     // this.tokenDoc.update(token); // TODO
-  //   });
-  // }
-
-  // 2. GET PERMISSION
   getPermission() {
-    // this.angularFireMessaging.requestPermission.subscribe(
-    //   () => {
-    //     console.log('Permission granted');
-    //   },
-    //   (error) => {
-    //     console.log('getPermission', error);
-    //   }
-    // );
-    // Notification.requestPermission() // this.messaging.requestPermission
     this.messaging.requestPermission()
       .then(() => {
-        // console.log('Notification permission granted.');
         return this.messaging.getToken();
       })
       .then(token => {
-        // console.log('get permission-> updateToken TODO -  FCM Token:', token);
         // this.updateToken(token);
       })
       .catch((err) => {
@@ -107,18 +68,8 @@ export class MessagingService {
       });
   }
 
-  // 3. RECEIVE MESSAGE
-  // receiveMessage() {
-  //   this.angularFireMessaging.messages.subscribe(
-  //     (payload) => {
-  //       console.log('new message received. ', payload);
-  //       this.currentMessage.next(payload);
-  //     });
-  // }
-
   receiveMessage() {
     this.messaging.onMessage((payload) => {
-      // console.log('Message received. ', payload);
       this.currentMessage.next(payload);
     });
   }

@@ -42,24 +42,6 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- coordinates -->
-      <!--      <div class="row_inputs">-->
-      <!--        <mat-form-field appearance="outline">-->
-      <!--          <mat-label>Meeting Coordinates</mat-label>-->
-      <!--          <input matInput formControlName="lat" placeholder="Latitude" name="lat" [(ngModel)]="coordinates.lat" required>-->
-      <!--          <mat-error *ngIf="errorHandling('lat', 'required')">Latitude is required</mat-error>-->
-      <!--          <mat-icon matSuffix>gps_fixed</mat-icon>-->
-      <!--          <mat-hint>Latitude must be a number between -90 and 90</mat-hint>-->
-      <!--        </mat-form-field>-->
-      <!--        <mat-form-field appearance="outline">-->
-      <!--          <mat-label>Meeting Coordinates</mat-label>-->
-      <!--          <input matInput formControlName="lng" placeholder="Longitude" name="lng" [(ngModel)]="coordinates.lng" required>-->
-      <!--          <mat-error *ngIf="errorHandling('lng', 'required')">Longitude is required</mat-error>-->
-      <!--          <mat-icon matSuffix>gps_fixed</mat-icon>-->
-      <!--          <mat-hint>Longitude must be a number between -180 and 180</mat-hint>-->
-      <!--        </mat-form-field>-->
-      <!--      </div>-->
-
       <!-- start date -->
       <div class="row_inputs" style="margin-top:20px">
         <mat-form-field>
@@ -117,11 +99,15 @@
         <!--        <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>-->
       </mat-form-field>
 
-<!--      <button (click)="openStatusDialog()">1111</button>-->
+      <!--      <button (click)="openStatusDialog()">1111</button>-->
       <div class="wrap_btn">
         <button type="button" mat-raised-button color="basic" (click)="cancelForm()">Cancel</button>
-        <button type="submit" *ngIf="upadateMeeting === false" mat-raised-button color="primary" [disabled]="!meetingForm.valid">Create meeting</button>
-        <button type="submit" *ngIf="upadateMeeting === true" mat-raised-button color="primary" [disabled]="!meetingForm.valid">Update meeting</button>
+        <button type="submit" *ngIf="upadateMeeting === false" mat-raised-button color="primary"
+                [disabled]="!meetingForm.valid">Create meeting
+        </button>
+        <button type="submit" *ngIf="upadateMeeting === true" mat-raised-button color="primary"
+                [disabled]="!meetingForm.valid">Update meeting
+        </button>
       </div>
     </form>
 

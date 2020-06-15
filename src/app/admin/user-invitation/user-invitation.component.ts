@@ -8,13 +8,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {Referral} from '../../models/Referral';
 import {Region} from '../../models/Region';
 import {FirebaseService} from '../../services/firebase.service';
-import {map} from 'rxjs/operators';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import {error} from 'util';
-import {Observable} from 'rxjs';
-
 
 @Component({
   selector: 'app-user-invitation',
@@ -32,7 +28,6 @@ export class UserInvitationComponent implements OnInit, OnDestroy {
     subject: '',
     body: ''
   };
-  referrals: Referral[];
   referral: Referral = {
     createdAt: '',
     updatedAt: new Date(),
@@ -83,70 +78,14 @@ export class UserInvitationComponent implements OnInit, OnDestroy {
       this.referral.regionIds = this.tempRegion;
       this.db.addReferral(this.referral);
 
-
-      // this.db.getLastReferral().pipe(map((response) => {
-      //   console.log(response);
-      // }));
-
-      // this.subscriptionGetLatReferral = this.db.getLastReferral().subscribe(data => {
-        // this.refId = data[0].id;
-        // console.log(this.refId);
-        // this.email.body = '<a href="https://application.iclub.vc/inv/ref/' + this.refId + '" target="_blank">Link Name</a>';
-      // });
-
       this.subscriptionGetLatReferral = this.db.getLastReferral()
         .map(resp => {
           this.refId = resp[0].id;
-          // this.email.body = '<a href="https://application.iclub.vc/inv/ref/' + this.refId + '" target="_blank">Link Name</a>';
           this.email.body = this.refId;
-          /// console.log(resp[0].id);
         }).subscribe(() => {
-        this.subscriptionGetLatReferral.unsubscribe();
-      });
-
-      // this.subscriptionGetLatReferral = this.db.getLastReferral()
-      //   .map(res => res)
-      //   .finally(() => this.isLoading = false)
-      //   .subscribe(
-      //     data => this.refId = data[0].id,
-      //     error => console.log(error)
-      //   );
-
-
-      // for (let i = 0; i < array.length; i++ ) {
-      //   console.log(i);
-      // }
-
-      // this.email.body = '<a href="https://application.iclub.vc/inv/ref/' + array[0] + '" target="_blank">Link Name</a>';
-
-      // console.log('this.refId', array);
-
-      // this.db.getLastReferral().map(users => console.log(users));
-
+          this.subscriptionGetLatReferral.unsubscribe();
+        });
     }
-
-
-    // return this.http.get(URL).pipe(map((response) => {
-    //   return response;
-    // }));
-
-
-    // if (this.subscriptionReferral) {
-    //   this.subscriptionReferral.unsubscribe();
-    // }
-    // this.subscriptionReferral = this.db.getReferral().subscribe(
-    //   data => {
-    //     this.referrals = data;
-    //     for (let ref of this.referrals) {
-    //       if (ref.createdAt.seconds >= currentDate) {
-    //         this.refId = ref.id;
-    //
-    //       } else {
-    //       }
-    //     }
-    //   },
-    //   err => console.log('err', err)
-    // );
   }
 
 

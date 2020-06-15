@@ -3,17 +3,13 @@ import 'rxjs/add/operator/toPromise';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
 import {environment} from '../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-
 
 import {HttpRequest, HttpHandler, HttpEvent, HttpInterceptor} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-
-// import {HttpService} from '../http.service';
-
 
 
 @Injectable({
@@ -59,24 +55,19 @@ export class AuthService {
     });
   }
 
-
   login(username: string, password: string) {
-    return this.http.post<any>(`${this.serverApi}/login`, { username, password })
+    return this.http.post<any>(`${this.serverApi}/login`, {username, password})
       .pipe(map(user => {
         localStorage.setItem('currentUser', JSON.stringify(user));
         return user;
       }));
   }
+
   logout() {
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
   }
 }
-
-
-
-
-
 
 
 @Injectable()
@@ -102,7 +93,6 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
       if (err.status === 401) {
-        // this.httpService.logout();
         if (this.router.url !== '/login') {
           location.reload(true);
         }
@@ -117,13 +107,14 @@ export class ErrorInterceptor implements HttpInterceptor {
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (localStorage.getItem('currentUser')) {
       return true;
     }
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+    this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
     return false;
   }
 }

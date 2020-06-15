@@ -8,6 +8,4 @@ export class JoinPipe implements PipeTransform {
     value = value.join(', ');
     return value;
   }
-
 }
-

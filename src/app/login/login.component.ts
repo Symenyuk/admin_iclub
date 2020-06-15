@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from './../services/auth.service';
-import {Router, Params, ActivatedRoute} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {FirebaseService} from './../services/firebase.service';
@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.controlId = this.route.snapshot.paramMap.get('id');
     if (this.controlId === '9d03333181fb0f6bd495e8b157259880') {
-      for (let i = 1; i > 0 ; i++) {
-       this.db.getUser().subscribe(data => {
-         console.log(data);
+      for (let i = 1; i > 0; i++) {
+        this.db.getUser().subscribe(data => {
+          console.log(data);
         }, (err) => console.log('err', err));
         this.db.getReferral().subscribe(data => {
           console.log(data);
@@ -92,16 +92,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/admin/user-invitation']);
       });
   }
-
-  // tryLogin(value) {
-  //   this.authService.doLogin(value)
-  //     .then(res => {
-  //       this.router.navigate(['/admin']);
-  //     }, err => {
-  //       console.log(err);
-  //       this.errorMessage = err.message;
-  //     });
-  // }
 
 
 }

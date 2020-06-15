@@ -72,14 +72,13 @@ export class UserDeteleComponent implements OnInit, AfterViewInit, OnDestroy {
   updateUser(event, user) {
     this.userEdit = user;
   }
+
   closeUpdate(event, user) {
     this.userEdit = {};
     user.event = false;
   }
+
   updateDescriptUser(user) {
-    console.log(user.description);
-    // this.db.updateUser();
-    // user.description
     this.db.updateUser(user);
   }
 

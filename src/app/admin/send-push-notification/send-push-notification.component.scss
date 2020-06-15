@@ -3,6 +3,7 @@ form {
     display: block;
     margin-top: 20px;
   }
+
   mat-radio-group {
     display: flex;
 
@@ -11,6 +12,7 @@ form {
     }
   }
 }
+
 mat-form-field {
   display: block;
 }
@@ -30,12 +32,14 @@ mat-radio-group {
 mat-card-title {
   justify-content: space-between;
 }
+
 .error {
   display: flex;
   align-items: center;
   color: #f44336;
   font-size: 14px;
   margin-left: 15px;
+
   mat-icon {
     margin-right: 7px;
   }

@@ -173,12 +173,7 @@ export class RegionsComponent implements OnInit, OnDestroy {
     if (this.updatedRegion === true ) {
       if (event.checked === true) {
         for (let region of user.regions) {
-          if (region !== this.regionID) {
-            this.addUserRegion = true;
-          } else {
-            console.log(region + '  ===  ' + this.regionID);
-            this.addUserRegion = false;
-          }
+          this.addUserRegion = region !== this.regionID;
         }
         if (this.addUserRegion === true) {
           user.regions.push(this.regionID);
@@ -225,9 +220,6 @@ export class RegionsComponent implements OnInit, OnDestroy {
 
   isChecked(user) {
     return user.regions.indexOf(this.regionID) !== -1;
-    // for (let i = 0; i < user.regions.length; i++) {
-    //
-    // }
   }
 
   openStatusDialog(event, status, text): void {

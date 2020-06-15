@@ -10,11 +10,9 @@ export class DialogBodyComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DialogBodyComponent>) {
   }
 
-  ngOnInit() {}
-
-  close() {
-    this.dialogRef.close('Thanks for using me!');
+  ngOnInit() {
   }
+
   onConfirm(): void {
     // Close the dialog, return true
     this.dialogRef.close(true);

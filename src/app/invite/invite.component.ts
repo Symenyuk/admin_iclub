@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FirebaseService } from '../services/firebase.service';
-import { Subscription } from 'rxjs/Subscription';
-import { Referral } from '../models/Referral';
-import { User } from '../models/User';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DeviceDetectorService } from 'ngx-device-detector';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {FirebaseService} from '../services/firebase.service';
+import {Subscription} from 'rxjs/Subscription';
+import {Referral} from '../models/Referral';
+import {User} from '../models/User';
+import {Router, ActivatedRoute} from '@angular/router';
+import {DeviceDetectorService} from 'ngx-device-detector';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 @Component({
@@ -30,8 +30,6 @@ export class InviteComponent implements OnInit, OnDestroy {
   registLink: string;
   sanitizedUrl;
 
-  // redirect: string;
-
   constructor(
     private db: FirebaseService,
     private router: Router,
@@ -44,6 +42,7 @@ export class InviteComponent implements OnInit, OnDestroy {
     this.appStore = 'https://apps.apple.com/us/app/iclub/id1492796007?ls=1';
 
   }
+
   epicFunction() {
     this.deviceInfo = this.deviceService.getDeviceInfo();
     this.isMobile = this.deviceService.isMobile();
@@ -56,15 +55,6 @@ export class InviteComponent implements OnInit, OnDestroy {
       // window.location.href = 'https://apps.apple.com/us/app/iclub/id1492796007?ls=1';
       // window.location.href = this.registLink;
     }
-    // if (this.deviceInfo.device === 'iPhone') {
-    //   window.open('https://apps.apple.com/us/app/iclub/id1492796007?ls=1', '_blank');
-    // }
-
-
-    // console.log(this.deviceInfo);
-    // console.log(isMobile);  // returns if the device is a mobile device (android / iPhone / windows-phone etc)
-    // console.log(isTablet);  // returns if the device us a tablet (iPad etc)
-    // console.log(isDesktopDevice); // returns if the app is running on a Desktop browser.
   }
 
   ngOnInit() {
@@ -77,34 +67,27 @@ export class InviteComponent implements OnInit, OnDestroy {
     }
     this.subscriptionUser = this.db.getUser().subscribe(users => {
       this.users = users;
-      // for (let user of this.users) {
-      //   console.log(user.contacts.emails);
-      // }
-      // for (let i = 0; i < this.users.length; i++) {
-        // console.log(this.users[i].contacts);
-        // for (let e = 0; e < this.users[i].contacts.emails.length; e++) {
-        //   console.log(e);
-        // }
-      // }
     });
     this.subscriptionReferral = this.db.getReferral().subscribe(data => {
-          this.referrals = data;
-          for (let ref = 0; ref < this.referrals.length; ref++) {
-            if (this.referrals[ref].id === this.id) {
-              this.exist = 'success';
-              this.loader = false;
-            } else {
-                this.noExist = true;
-                this.loader = false;
-            }
+        this.referrals = data;
+        for (let ref = 0; ref < this.referrals.length; ref++) {
+          if (this.referrals[ref].id === this.id) {
+            this.exist = 'success';
+            this.loader = false;
+          } else {
+            this.noExist = true;
+            this.loader = false;
           }
+        }
       },
       err => console.log('err', err)
     );
   }
-  getRegistLink():SafeUrl {
+
+  getRegistLink(): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(this.registLink);
   }
+
   goToAppStore() {
     window.location.href = 'https://apps.apple.com/us/app/iclub/id1492796007?ls=1';
   }

@@ -6,10 +6,12 @@
   font-weight: 500;
   color: #155724;
   text-align: center;
+
   mat-icon {
     margin-right: 10px;
   }
 }
+
 .error {
   display: flex;
   align-items: center;
@@ -17,10 +19,12 @@
   font-size: 18px;
   font-weight: 500;
   color: #f44336;
+
   mat-icon {
     margin-right: 10px;
   }
 }
+
 .mat-dialog-actions {
   display: flex;
   align-items: center;

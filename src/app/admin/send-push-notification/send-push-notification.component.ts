@@ -70,7 +70,6 @@ export class SendPushNotificationComponent implements OnInit, OnDestroy {
     this.tempUsers = [];
   }
 
-
   pushUserList(event, item) {
     if (event.checked === true) {
       for (let token of item.tokens) {
@@ -85,8 +84,6 @@ export class SendPushNotificationComponent implements OnInit, OnDestroy {
       }
     }
   }
-
-
 
   onSubmit() {
     this.submitted = true;

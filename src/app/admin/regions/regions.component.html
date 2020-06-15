@@ -8,8 +8,11 @@
         <div class="left_box">
 
           <mat-form-field>
-            <input type="text" matInput formControlName="name" placeholder="Name region" [(ngModel)]="region.name" name="name" (change)="validNameRegion($event)">
-            <mat-hint style="color: #f44336;" *ngIf="nameRegionValid === false">region "{{region.name}}" already exists</mat-hint>
+            <input type="text" matInput formControlName="name" placeholder="Name region" [(ngModel)]="region.name"
+                   name="name" (change)="validNameRegion($event)">
+            <mat-hint style="color: #f44336;" *ngIf="nameRegionValid === false">region "{{region.name}}" already
+              exists
+            </mat-hint>
             <mat-error *ngIf="regionForm.controls['name'].invalid && regionForm.controls['name'].touched">Name is
               required
             </mat-error>
@@ -22,16 +25,19 @@
 
             </div>
 
-            <button *ngIf="updatedRegion === false" type="button" mat-stroked-button color="primary" (click)="imgFileInput.click()">Add region image</button>
-            <button *ngIf="updatedRegion === true && region.image" type="button" mat-stroked-button color="primary" (click)="imgFileInput.click()">Update region image</button>
-            <button *ngIf="updatedRegion === true && !region.image" type="button" mat-stroked-button color="primary" (click)="imgFileInput.click()">Add region image</button>
+            <button *ngIf="updatedRegion === false" type="button" mat-stroked-button color="primary"
+                    (click)="imgFileInput.click()">Add region image
+            </button>
+            <button *ngIf="updatedRegion === true && region.image" type="button" mat-stroked-button color="primary"
+                    (click)="imgFileInput.click()">Update region image
+            </button>
+            <button *ngIf="updatedRegion === true && !region.image" type="button" mat-stroked-button color="primary"
+                    (click)="imgFileInput.click()">Add region image
+            </button>
             <input hidden type="file" #imgFileInput (change)="uploadFile($event)">
-
-<!--            <button type="button" (click)="deleteImg(region.image)">Delete img</button>-->
 
             <span class="file_name" *ngIf="file">{{file.name}}</span>
             <mat-progress-bar *ngIf="file" mode="determinate" value="{{ uploadPercent | async }}"></mat-progress-bar>
-            <!--    <a class="download_url" [href]="UploadedFileURL | async">{{ UploadedFileURL | async }}</a>-->
           </div>
 
         </div>
@@ -43,7 +49,8 @@
             <mat-card-content>
               <ul *ngIf="users?.length > 0;else noUsers">
                 <li *ngFor="let item of users">
-                  <mat-checkbox (change)="addUsers($event, item)" [checked]="isChecked(item)">{{item.name}}</mat-checkbox>
+                  <mat-checkbox (change)="addUsers($event, item)"
+                                [checked]="isChecked(item)">{{item.name}}</mat-checkbox>
                 </li>
               </ul>
               <ng-template #noUsers>
@@ -58,8 +65,12 @@
 
       <div class="wrap_btn">
         <button type="button" mat-raised-button color="basic" (click)="cancelForm()">Cancel</button>
-        <button *ngIf="updatedRegion === false" [disabled]="!regionForm.valid" type="submit" mat-raised-button color="primary">Create region</button>
-        <button *ngIf="updatedRegion === true" [disabled]="!regionForm.valid" type="submit" mat-raised-button color="primary">Update region</button>
+        <button *ngIf="updatedRegion === false" [disabled]="!regionForm.valid" type="submit" mat-raised-button
+                color="primary">Create region
+        </button>
+        <button *ngIf="updatedRegion === true" [disabled]="!regionForm.valid" type="submit" mat-raised-button
+                color="primary">Update region
+        </button>
       </div>
     </form>
 

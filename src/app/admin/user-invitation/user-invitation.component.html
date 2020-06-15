@@ -57,20 +57,20 @@
             </mat-card-content>
           </mat-card>
 
-          <button type="button" [disabled]="tempRegion.length === 0" class="form_deeplink" color="primary" mat-stroked-button (click)="formDeeplink()">
+          <button type="button" [disabled]="tempRegion.length === 0" class="form_deeplink" color="primary"
+                  mat-stroked-button (click)="formDeeplink()">
             <mat-icon>link</mat-icon>
             Create deeplink
           </button>
-<!--          <div *ngIf="regionId">appiclub://invite?ref={{regionId}}</div>-->
+          <!--          <div *ngIf="regionId">appiclub://invite?ref={{regionId}}</div>-->
         </div>
 
       </div>
 
-      <button type="submit" [disabled]="!emailForm.valid || refId === ''" mat-raised-button color="primary">Send email</button>
+      <button type="submit" [disabled]="!emailForm.valid || refId === ''" mat-raised-button color="primary">Send email
+      </button>
     </form>
 
-    <!--    <div *ngIf="mailStatus === 'done'" class="alert_status success">Email successfully sent</div>-->
-    <!--    <div *ngIf="mailStatus === 'error'" class="alert_status error">Email not sent</div>-->
 
   </div>
 </div>

@@ -34,8 +34,6 @@ export class CreateGroupChatComponent implements OnInit, OnDestroy {
     updatedAt: new Date(),
   };
 
-  messages: Message[];
-
   file: any;
   isUploading: boolean;
   isUploaded: boolean;
@@ -158,10 +156,7 @@ export class CreateGroupChatComponent implements OnInit, OnDestroy {
 
   addUsers(event, item) {
     if (event.checked === true) {
-      // console.log(item);
-      // this.tempUserId['' + item.id] = true; // *
       this.tempUserId.push(item.id);
-      // console.log(this.tempUserId);
       if (item.tokens) {
         for (let token of item.tokens) {
           this.tempUserToken.push(token);
@@ -202,7 +197,6 @@ export class CreateGroupChatComponent implements OnInit, OnDestroy {
 
   isChecked(item) {
     return this.chat.userIds.indexOf(item) !== -1;
-    // return ~this.chat.userIds.indexOf(item);
   }
 
   openStatusDialog(event, status, text): void {
@@ -225,7 +219,6 @@ export class CreateGroupChatComponent implements OnInit, OnDestroy {
     // Update group chat
     if (this.updatedChat === true) {
       this.chat.userIds = this.tempUserId;
-      // console.log(this.chat);
       this.db.updateChat(this.chat, this.updateChatId);
       if (this.groupChatForm.status === 'VALID') {
         this.openStatusDialog('update', 'success', 'Group chat updated');

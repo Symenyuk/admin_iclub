@@ -1,17 +1,17 @@
 export interface User {
   id?: string;
-  name?: string; // *
+  name?: string;
   image?: string;
   description?: string;
-  role?: string; // *
-  regions?: any; // [string] *
+  role?: string;
+  regions?: any;
   company?: string;
   profession?: string;
-  pushTokens?: string; // [string]
-  contacts?: object; // { “phones”: [String]?, “emails”: [String]?, “facebook”: String?,“linkedin”: String? }
-  createdAt?: string; // timestamp *
-  updatedAt?: any; // timestamp *
-  deleted?: any; // *
-  deletedAt?: any; // timestamp
+  pushTokens?: string;
+  contacts?: object;
+  createdAt?: string;
+  updatedAt?: any;
+  deleted?: any;
+  deletedAt?: any;
   tokens?: any;
 }

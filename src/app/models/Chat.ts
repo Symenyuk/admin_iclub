@@ -2,11 +2,10 @@ export interface Chat {
   id?: string;
   name?: string;
   image?: string;
-  // message?: string;
-  type?: string; // *
-  userIds?: any; // [string:bool] *
+  type?: string;
+  userIds?: any;
   regionID?: string;
-  createdAt?: any; // timestamp *
-  updatedAt?: any; // timestamp *
+  createdAt?: any;
+  updatedAt?: any;
 }
 
