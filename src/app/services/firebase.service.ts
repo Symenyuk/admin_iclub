@@ -156,7 +156,6 @@ export class FirebaseService {
     this.userDoc = this.afs.doc(`User/${user.id}`);
     let regions = user.regions;
     for (let i = 0; i < regions.length; i++) {
-
       if (idRegionDelete === regions[i]) {
         let index = regions.indexOf(regions[i]);
         if (index > -1) {
@@ -176,16 +175,16 @@ export class FirebaseService {
   }
 
 
-  updateUser(user: User) {
-    this.userDoc = this.afs.doc(`User/${user.id}`);
-    console.log(user);
-    this.userDoc.update(user);
-  }
+  // updateUser(user: User) {
+  //   this.userDoc = this.afs.doc(`User/${user.id}`);
+  //   console.log(user);
+  //   this.userDoc.update(user);
+  // }
 
-  updateUserDescription(user: User) { // not used
+  updateUser(user: User) {
     let descript = user.description;
     this.userCollection
-      .doc()
+      .doc(user.id)
       .update({descript});
   }
 

@@ -168,7 +168,6 @@ export class RegionsComponent implements OnInit, OnDestroy {
 
 
   addUsers(event, user) {
-
     // update region
     if (this.updatedRegion === true ) {
       if (event.checked === true) {
