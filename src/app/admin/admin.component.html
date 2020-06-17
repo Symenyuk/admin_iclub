@@ -4,9 +4,7 @@
     <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
-<!--    <a mat-list-item [routerLink]="['/admin']" (click)="setSection('admin')" routerLinkActive="active">Admin-iclub</a>-->
     <div>iClub Admin panel</div>
-
   </div>
 
 
@@ -23,22 +21,40 @@
     <mat-nav-list>
       <a [ngClass]="{'active':section === 'user-invitation'}" routerLinkActive="active"
          [routerLinkActiveOptions]="{exact: true}" (click)="setSection('user-invitation')" mat-list-item
-         [routerLink]="['/admin/user-invitation']">User invitations</a>
+         [routerLink]="['/admin/user-invitation']">
+        <mat-icon class="mat-icon">contact_mail</mat-icon>
+        User invitations
+      </a>
       <a [ngClass]="{'active':section === 'send-push-notification'}" routerLinkActive="active"
          [routerLinkActiveOptions]="{exact: true}" (click)="setSection('send-push-notification')" mat-list-item
-         [routerLink]="['/admin/send-push-notification']">Sending push notifications</a>
+         [routerLink]="['/admin/send-push-notification']">
+        <mat-icon class="mat-icon">notifications_active</mat-icon>
+        Sending push notifications
+      </a>
       <a [ngClass]="{'active':section === 'meetings'}" routerLinkActive="active"
          [routerLinkActiveOptions]="{exact: true}" (click)="setSection('meetings')" mat-list-item
-         [routerLink]="['/admin/meetings']">Meetings</a>
+         [routerLink]="['/admin/meetings']">
+        <mat-icon class="mat-icon">meeting_room</mat-icon>
+        Meetings
+      </a>
       <a [ngClass]="{'active':section === 'group-chats'}" routerLinkActive="active"
          [routerLinkActiveOptions]="{exact: true}" (click)="setSection('group-chats')" mat-list-item
-         [routerLink]="['/admin/group-chats']">Group chats</a>
+         [routerLink]="['/admin/group-chats']">
+        <mat-icon class="mat-icon">chat</mat-icon>
+        Group chats
+      </a>
       <a [ngClass]="{'active':section === 'regions'}" routerLinkActive="active"
          [routerLinkActiveOptions]="{exact: true}" (click)="setSection('regions')" mat-list-item
-         [routerLink]="['/admin/regions']">Regions</a>
+         [routerLink]="['/admin/regions']">
+        <mat-icon class="mat-icon">place</mat-icon>
+        Regions
+      </a>
       <a [ngClass]="{'active':section === 'users'}" routerLinkActive="active"
          [routerLinkActiveOptions]="{exact: true}" (click)="setSection('users')" mat-list-item
-         [routerLink]="['/admin/users']">Users</a>
+         [routerLink]="['/admin/users']">
+        <mat-icon class="mat-icon">people</mat-icon>
+        Users
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content fxLayout="column">

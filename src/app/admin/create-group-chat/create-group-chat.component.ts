@@ -156,12 +156,20 @@ export class CreateGroupChatComponent implements OnInit, OnDestroy {
 
   addUsers(event, item) {
     if (event.checked === true) {
-      this.tempUserId.push(item.id);
-      if (item.tokens) {
-        for (let token of item.tokens) {
-          this.tempUserToken.push(token);
+      if (this.tempUserId.length) {
+        let isset = this.tempUserId.includes(item.id);
+        if (isset === false) {
+          this.tempUserId.push(item.id);
         }
+      } else {
+        this.tempUserId.push(item.id);
       }
+      // this.tempUserId.push(item.id);
+      // if (item.tokens) {
+      //   for (let token of item.tokens) {
+      //     this.tempUserToken.push(token);
+      //   }
+      // }
     } else if (event.checked === false) {
       // delete this.tempUserId['' + item.id];
       let ind = this.tempUserId.indexOf(item.id);
@@ -229,6 +237,7 @@ export class CreateGroupChatComponent implements OnInit, OnDestroy {
     if (this.updatedChat !== true) {
       this.chat.userIds = this.tempUserId;
       this.db.addChat(this.chat);
+      this.tempUserId = [];
 
       this.msgService.getPermission();
       this.msgService.receiveMessage();

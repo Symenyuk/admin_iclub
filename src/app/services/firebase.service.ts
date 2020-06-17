@@ -20,6 +20,7 @@ export class FirebaseService {
   userCollection: AngularFirestoreCollection<User>;
   meetupCollection: AngularFirestoreCollection<Meetup>;
   regionCollection: AngularFirestoreCollection<Region>;
+  regionCollectionLast: AngularFirestoreCollection<Region>;
   referralCollection: AngularFirestoreCollection<Referral>;
   referralCollectionLast: AngularFirestoreCollection<Referral>;
   messageCollection: AngularFirestoreCollection<Message>;
@@ -28,6 +29,7 @@ export class FirebaseService {
   users: Observable<User[]>;
   meetups: Observable<Meetup[]>;
   regions: Observable<Region[]>;
+  regionsLast: Observable<Region[]>;
   referrals: Observable<Referral[]>;
   referralsLast: Observable<Referral[]>;
   messages: Observable<Message[]>;
@@ -56,6 +58,7 @@ export class FirebaseService {
     this.userCollection = this.afs.collection('User', ref => ref);
     this.meetupCollection = this.afs.collection('Meetup', ref => ref);
     this.regionCollection = this.afs.collection('Region', ref => ref);
+    this.regionCollectionLast = this.afs.collection('Region', ref => ref.orderBy('createdAt').limitToLast(1));
     this.referralCollection = this.afs.collection('Referral', ref => ref);
     this.messageCollection = this.afs.collection('Message', ref => ref);
     this.referralCollectionLast = this.afs.collection('Referral', ref => ref.orderBy('createdAt').limitToLast(1));
@@ -85,6 +88,13 @@ export class FirebaseService {
     });
 
     this.regions = this.regionCollection.snapshotChanges().map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as Region;
+        data.id = a.payload.doc.id;
+        return data;
+      });
+    });
+    this.regionsLast = this.regionCollectionLast.snapshotChanges().map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as Region;
         data.id = a.payload.doc.id;
@@ -180,12 +190,23 @@ export class FirebaseService {
   //   console.log(user);
   //   this.userDoc.update(user);
   // }
-
-  updateUser(user: User) {
-    let descript = user.description;
+  updateAcvionUser(user: User) {
+    let deleted = user.deleted;
     this.userCollection
       .doc(user.id)
-      .update({descript});
+      .update({deleted});
+  }
+  updateDescriptionUser(user: User) {
+    let description = user.description;
+    this.userCollection
+      .doc(user.id)
+      .update({description});
+  }
+  createRegionAddUserRegions(user) {
+    let regions = user.regions;
+    this.userCollection
+      .doc(user.id)
+      .update({regions});
   }
 
   updateUserRegion(users) {
@@ -219,6 +240,9 @@ export class FirebaseService {
   // ================ REGION ================
   getRegion() {
     return this.regions;
+  }
+  getLastRegion() {
+    return this.regionsLast;
   }
 
   addRegion(region: Region) {

@@ -40,6 +40,7 @@ export class RegionsComponent implements OnInit, OnDestroy {
   validForm: boolean;
   uploadPercent: Observable<number>;
   UploadedFileURL: Observable<string>;
+  subscriptionRegionLast: Subscription;
   subscriptionRegion: Subscription;
   subscriptionChat: Subscription;
   subscriptionUser: Subscription;
@@ -87,6 +88,7 @@ export class RegionsComponent implements OnInit, OnDestroy {
       name: new FormControl('', [Validators.required]),
     });
   }
+
 
   validNameRegion(event) {
     this.nameRegionValid = true;
@@ -168,23 +170,24 @@ export class RegionsComponent implements OnInit, OnDestroy {
 
 
   addUsers(event, user) {
-    // update region
-    if (this.updatedRegion === true ) {
+    if (this.updatedRegion === true) {
       if (event.checked === true) {
-        for (let region of user.regions) {
-          this.addUserRegion = region !== this.regionID;
-        }
-        if (this.addUserRegion === true) {
+        if (user.regions.length) {
+          let isset = user.regions.includes(this.regionID);
+          if (isset === false) {
+            user.regions.push(this.regionID);
+          }
+        } else {
           user.regions.push(this.regionID);
         }
       } else if (event.checked === false) {
         for (let i = 0; i < user.regions.length; i++) {
           if (user.regions[i] === this.regionID) {
-
-            let idx = user.regions.indexOf(this.regionID);
-            if (idx !== -1) {
-              user.regions.splice(idx, 1);
-            }
+            // let idx = user.regions.indexOf(this.regionID);
+            // if (idx !== -1) {
+            //   user.regions.splice(idx, 1);
+            // }
+            user.regions.splice(i, 1);
           }
         }
       }
@@ -250,32 +253,52 @@ export class RegionsComponent implements OnInit, OnDestroy {
       }
     }
 
-
+    if (this.subscriptionRegion) {
+      this.subscriptionRegion.unsubscribe();
+    }
     // Create Region
     if (this.updatedRegion !== true) {
+      this.region.createdAt = new Date();
       this.db.addRegion(this.region);
 
-      this.subscriptionRegion = this.db.getRegion().subscribe(data => {
-        for (let region of data) {
-          if (region.name === this.region.name) {
-            this.regionID = region.id;
-            this.chat.regionID = region.id;
-            this.db.addChat(this.chat);
-          }
-        }
+      const name = this.region.name;
+
+      this.subscriptionRegionLast = this.db.getLastRegion().subscribe(data => {
+
+      });
+      // .map(resp => {
+      //
+      //   console.log('resp', resp);
+      // }).subscribe(() => {
+      //   this.subscriptionRegionLast.unsubscribe();
+      // });
+
+
+      this.subscriptionRegionLast = this.db.getLastRegion().subscribe(data => {
+        // console.log(data[0].id);
+        this.regionID = data[0].id;
+
         // add regionId to selected users
-        for (let i = 0; i < this.tempUsers.length; i++) {
-          this.tempUsers[i].regions.push(this.regionID);
-          this.db.updateUser(this.tempUsers[i]);
+        if (this.tempUsers.length) {
+          for (let i = 0; i < this.tempUsers.length; i++) {
+            let isset = this.tempUsers[i].regions.includes(this.regionID);
+            if (isset === false) {
+              this.tempUsers[i].regions.push(this.regionID);
+              this.db.createRegionAddUserRegions(this.tempUsers[i]);
+            } else {
+              console.log('dublicate', this.regionID);
+            }
+          }
+          this.tempUsers = [];
         }
       });
-
       if (this.regionForm.status === 'VALID') {
         this.openStatusDialog('create', 'success', 'Region created');
         this.cancelForm();
       }
     }
   }
+
 
   cancelForm() {
     this.submitted = false;
@@ -287,6 +310,9 @@ export class RegionsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscriptionRegion) {
       this.subscriptionRegion.unsubscribe();
+    }
+    if (this.subscriptionRegionLast) {
+      this.subscriptionRegionLast.unsubscribe();
     }
     if (this.subscriptionChat) {
       this.subscriptionChat.unsubscribe();

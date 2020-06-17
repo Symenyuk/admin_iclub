@@ -48,9 +48,14 @@ mat-sidenav-content {
 
 
 .mat-list-item {
+  font-size: 14px;
+  font-weight: 500;
   &.active {
     background-color: #3f51b5;
     color: #fff;
+  }
+  .mat-icon {
+    margin-right: 15px;
   }
 }
 

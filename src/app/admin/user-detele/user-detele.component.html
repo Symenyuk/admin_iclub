@@ -37,7 +37,7 @@
     <div *ngIf="userEdit.name === user.name" class="about_me">
       <textarea rows="10" [(ngModel)]="user.description"></textarea>
       <button type="button" mat-raised-button color="primary" (click)="updateDescriptUser(user); closeUpdate($event, user)">Save</button>
-      <button type="button" mat-raised-button color="primary" (click)="closeUpdate($event, user)">Close</button>
+      <button type="button"  mat-stroked-button color="primary" (click)="closeUpdate($event, user)">Close</button>
     </div>
   </ng-container>
 

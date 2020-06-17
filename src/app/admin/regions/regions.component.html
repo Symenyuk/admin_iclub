@@ -49,8 +49,10 @@
             <mat-card-content>
               <ul *ngIf="users?.length > 0;else noUsers">
                 <li *ngFor="let item of users">
-                  <mat-checkbox (change)="addUsers($event, item)"
-                                [checked]="isChecked(item)">{{item.name}}</mat-checkbox>
+                  <mat-checkbox
+                    (change)="addUsers($event, item)"
+                    [checked]="isChecked(item)">{{item.name}}
+                  </mat-checkbox>
                 </li>
               </ul>
               <ng-template #noUsers>

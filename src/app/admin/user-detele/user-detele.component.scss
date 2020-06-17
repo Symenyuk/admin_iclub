@@ -27,13 +27,26 @@
       width: 80%;
 
       .name {
-        width: 25%;
+        width: 20%;
         padding: 0 27px;
       }
 
       .regions {
-        width: 60%;
+        width: 30%;
+        max-width: 30%;
         text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 20px;
+      }
+      .descript {
+        width: 50%;
+        white-space: nowrap;
+        max-width: 50%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 20px;
       }
     }
 

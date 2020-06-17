@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, AfterViewInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {FirebaseService} from '../../services/firebase.service';
 import {User} from '../../models/User';
 import {Region} from '../../models/Region';
@@ -11,7 +11,7 @@ import {DialogBodyComponent} from '../../dialog-body/dialog-body.component';
   templateUrl: './user-detele.component.html',
   styleUrls: ['./user-detele.component.scss']
 })
-export class UserDeteleComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UserDeteleComponent implements OnInit, OnDestroy {
   users: User[];
 
   regions: Region[];
@@ -44,10 +44,6 @@ export class UserDeteleComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  ngAfterViewInit() {
-
-  }
-
   openDialog(user: User): void {
     const dialogRef = this.matDialog.open(DialogBodyComponent, {
       width: '350px',
@@ -57,7 +53,7 @@ export class UserDeteleComponent implements OnInit, AfterViewInit, OnDestroy {
       if (dialogResult === true) {
         user.deleted = true;
         user.deletedAt = new Date();
-        this.db.updateUser(user);
+        this.db.updateAcvionUser(user);
       }
     });
   }
@@ -66,7 +62,7 @@ export class UserDeteleComponent implements OnInit, AfterViewInit, OnDestroy {
   activateUser($event, user) {
     user.deleted = false;
     user.updatedAt = new Date();
-    this.db.updateUser(user);
+    this.db.updateAcvionUser(user);
   }
 
   updateUser(event, user) {
@@ -79,7 +75,7 @@ export class UserDeteleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   updateDescriptUser(user) {
-    this.db.updateUser(user);
+    this.db.updateDescriptionUser(user);
   }
 
 
