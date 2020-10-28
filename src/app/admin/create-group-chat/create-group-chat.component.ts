@@ -164,12 +164,11 @@ export class CreateGroupChatComponent implements OnInit, OnDestroy {
       } else {
         this.tempUserId.push(item.id);
       }
-      // this.tempUserId.push(item.id);
-      // if (item.tokens) {
-      //   for (let token of item.tokens) {
-      //     this.tempUserToken.push(token);
-      //   }
-      // }
+      if (item.tokens) {
+        for (let token of item.tokens) {
+          this.tempUserToken.push(token);
+        }
+      }
     } else if (event.checked === false) {
       // delete this.tempUserId['' + item.id];
       let ind = this.tempUserId.indexOf(item.id);
